@@ -1,0 +1,17 @@
+{
+  "name": "astik",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "uvu -r ts-node/register src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4",
+    "uvu": "^0.5.2"
+  }
+}
