@@ -1,8 +1,14 @@
+import {isWhiteSpace} from "./white-space";
+
 type Token = string;
 type TokenizedDocument = ReadonlyArray<Token>;
 
 const operators = ["+", "-", "="];
 function isDelimiter(ch: string): boolean {
+  if (isWhiteSpace(ch)) {
+    return true;
+  }
+
   if ("0" <= ch && ch <= "9") {
     return false;
   }
