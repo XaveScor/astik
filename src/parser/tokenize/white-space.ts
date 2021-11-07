@@ -1,3 +1,5 @@
+import {Tokens} from "./tokens";
+
 /**
  * spec: https://262.ecma-international.org/12.0/#sec-white-space
  */
@@ -32,6 +34,6 @@ const whiteSpaceList = [
   IDEOGRAPHIC_SPACE,
 ];
 
-export function isWhiteSpace(ch: string): boolean {
-  return is200XRange(ch) || whiteSpaceList.some((ws) => ws === ch);
+export function parseWhiteSpace(ch: string): Tokens {
+  return is200XRange(ch) || whiteSpaceList.some((ws) => ws === ch) ? Tokens.WhiteSpace : Tokens.NotFound;
 }
