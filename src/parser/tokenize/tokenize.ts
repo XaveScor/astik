@@ -1,12 +1,11 @@
-import {Tokens} from "./tokens";
+import {Token} from "./tokens";
 import {parseWhiteSpace} from "./white-space";
 
-type Token = string;
-type TokenizedDocument = ReadonlyArray<Token>;
+type TokenizedDocument = ReadonlyArray<string>;
 
 const operators = ["+", "-", "="];
 function isDelimiter(ch: string): boolean {
-  if (parseWhiteSpace(ch) === Tokens.WhiteSpace) {
+  if (parseWhiteSpace(ch) === Token.WhiteSpace) {
     return true;
   }
 

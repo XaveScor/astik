@@ -1,4 +1,4 @@
-export const enum Tokens {
+export const enum Token {
   NotFound,
   MultipleVariants,
   WhiteSpace,
