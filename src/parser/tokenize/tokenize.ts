@@ -1,3 +1,4 @@
+import {CharStream} from "../stream/char-stream";
 import {Token} from "./tokens";
 import {parseWhiteSpace} from "./white-space";
 
@@ -29,9 +30,11 @@ function isDelimiter(ch: string): boolean {
 }
 
 export function tokenize(input: string): TokenizedDocument {
+  const stream = new CharStream(input);
   let tokenAcc = "";
   const res = [];
-  for (const ch of input) {
+  while (!stream.isClosed()) {
+    const ch = stream.getChar();
     if (isDelimiter(ch)) {
       if (tokenAcc !== "") {
         res.push(tokenAcc);
