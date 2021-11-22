@@ -1,10 +1,10 @@
 import {CharStream} from "../stream/char-stream";
 import {Token} from "./tokens";
-import {parseWhiteSpace} from "./white-space";
-import {Tokenizer} from "./tokenizer";
+import {whiteSpaceTokenizer} from "./tokenizers/white-space";
+import {Tokenizer} from "./tokenizers/tokenizer";
 
 type TokenizedDocument = ReadonlyArray<Token>;
-const tokenizers: ReadonlyArray<Tokenizer> = [parseWhiteSpace];
+const tokenizers: ReadonlyArray<Tokenizer> = [whiteSpaceTokenizer];
 
 export function tokenize(input: string): TokenizedDocument {
   const stream = new CharStream(input);

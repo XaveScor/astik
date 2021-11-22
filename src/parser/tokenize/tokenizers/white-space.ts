@@ -1,4 +1,4 @@
-import {Token} from "./tokens";
+import {Token} from "../tokens";
 import {Tokenizer} from "./tokenizer";
 
 /**
@@ -35,7 +35,7 @@ const whiteSpaceList = [
   IDEOGRAPHIC_SPACE,
 ];
 
-export const parseWhiteSpace: Tokenizer = (chars) => {
+export const whiteSpaceTokenizer: Tokenizer = (chars) => {
   if (chars.length === 0) {
     return [Token.MultipleVariants, 0];
   }
