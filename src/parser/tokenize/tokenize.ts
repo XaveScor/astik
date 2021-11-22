@@ -2,9 +2,10 @@ import {CharStream} from "../stream/char-stream";
 import {Token} from "./tokens";
 import {whiteSpaceTokenizer} from "./tokenizers/white-space";
 import {Tokenizer} from "./tokenizers/tokenizer";
+import {lineTerminatorSequenceTokenizer} from "./tokenizers/line-terminator";
 
 type TokenizedDocument = ReadonlyArray<Token>;
-const tokenizers: ReadonlyArray<Tokenizer> = [whiteSpaceTokenizer];
+const tokenizers: ReadonlyArray<Tokenizer> = [whiteSpaceTokenizer, lineTerminatorSequenceTokenizer];
 
 export function tokenize(input: string): TokenizedDocument {
   const stream = new CharStream(input);
@@ -12,19 +13,22 @@ export function tokenize(input: string): TokenizedDocument {
   while (!stream.isClosed()) {
     let currentString = "";
     let answer: Token | null = null;
-    let answerLen = Infinity;
+    let answerLen = -1;
 
     nextToken: for (const tokenizer of tokenizers) {
-      while (!stream.isClosed()) {
-        currentString += stream.nextChar();
+      console.log(tokenizer);
+      while (true) {
+        if (!stream.isClosed()) {
+          currentString += stream.nextChar();
+        }
         const [token, len] = tokenizer(currentString);
         switch (token) {
           case Token.NotFound:
-            break nextToken;
+            continue nextToken;
           case Token.MultipleVariants:
             continue;
           default:
-            if (len < answerLen) {
+            if (len > answerLen) {
               answer = token;
               answerLen = len;
               break nextToken;
