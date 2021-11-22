@@ -16,7 +16,6 @@ export function tokenize(input: string): TokenizedDocument {
     let answerLen = -1;
 
     nextToken: for (const tokenizer of tokenizers) {
-      console.log(tokenizer);
       while (true) {
         if (!stream.isClosed()) {
           currentString += stream.nextChar();
