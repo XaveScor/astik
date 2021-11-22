@@ -1,4 +1,5 @@
 import {Token} from "./tokens";
+import {Tokenizer} from "./tokenizer";
 
 /**
  * spec: https://262.ecma-international.org/12.0/#sec-white-space
@@ -34,6 +35,12 @@ const whiteSpaceList = [
   IDEOGRAPHIC_SPACE,
 ];
 
-export function parseWhiteSpace(ch: string): Token {
-  return is200XRange(ch) || whiteSpaceList.some((ws) => ws === ch) ? Token.WhiteSpace : Token.NotFound;
+export const parseWhiteSpace: Tokenizer = (chars) => {
+  if (chars.length === 0) {
+    return [Token.MultipleVariants, 0];
+  }
+
+  return is200XRange(chars[0]) || whiteSpaceList.some((ws) => ws === chars[0])
+    ? [Token.WhiteSpace, 1]
+    : [Token.NotFound, 0];
 }

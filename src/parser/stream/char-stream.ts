@@ -6,10 +6,14 @@ export class CharStream {
     this.#source = str;
   }
 
-  getChar() {
+  nextChar() {
     const currentSymbol = this.#source[this.#id];
     ++this.#id;
     return currentSymbol;
+  }
+
+  movePointerBack(delta: number) {
+    this.#id -= delta;
   }
 
   isClosed() {
