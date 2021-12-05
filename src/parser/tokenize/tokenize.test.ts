@@ -1,14 +1,12 @@
-import {test} from "uvu";
-import * as assert from "uvu/assert";
 import {createPosition} from "./position";
 import {tokenize} from "./tokenize";
 import {Token} from "./tokens";
 
-test("simple tokenizer", () => {
+it("simple tokenizer", () => {
   const program = "   ";
   const tokens = tokenize(program);
 
-  assert.equal(tokens, [
+  expect(tokens).toStrictEqual([
     {
       start: createPosition(0),
       finish: createPosition(1),
@@ -30,11 +28,11 @@ test("simple tokenizer", () => {
   ]);
 });
 
-test("symbols from not first tokenizer", () => {
+it("symbols from not first tokenizer", () => {
   const program = "\n";
   const tokens = tokenize(program);
 
-  assert.equal(tokens, [
+  expect(tokens).toStrictEqual([
     {
       start: createPosition(0),
       finish: createPosition(1),
@@ -44,11 +42,11 @@ test("symbols from not first tokenizer", () => {
   ]);
 });
 
-test("different symbols size", () => {
+it("different symbols size", () => {
   const program = " \n \r\n ";
   const tokens = tokenize(program);
 
-  assert.equal(tokens, [
+  expect(tokens).toStrictEqual([
     {
       start: createPosition(0),
       finish: createPosition(1),
@@ -81,5 +79,3 @@ test("different symbols size", () => {
     },
   ]);
 });
-
-test.run();

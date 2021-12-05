@@ -1,5 +1,3 @@
-import {suite} from "uvu";
-import * as assert from "uvu/assert";
 import {Token} from "../tokens";
 import {createPosition} from "../position";
 import {whiteSpaceTokenizer} from "./white-space";
@@ -10,94 +8,92 @@ const lenOne = createPosition(1);
 /**
  * https://262.ecma-international.org/12.0/#sec-white-space
  */
-const spec12_2 = suite("Spec 12.2");
+describe("Spec 12.2", () => {
+  it("base non-whitespace validation", () => {
+    expect(whiteSpaceTokenizer("1")).toStrictEqual([Token.NotFound, lenZero, 0]);
+  });
 
-spec12_2("base non-whitespace validation", () => {
-  assert.equal(whiteSpaceTokenizer("1"), [Token.NotFound, lenZero, 0]);
+  it("CHARACTER TABULATION validation", () => {
+    expect(whiteSpaceTokenizer("\u0009")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("LINE TABULATION validation", () => {
+    expect(whiteSpaceTokenizer("\u000B")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("FORM FEED validation", () => {
+    expect(whiteSpaceTokenizer("\u000B")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u0020")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("NO-BREAK SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u000B")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("ZERO WIDTH NO-BREAK SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\uFEFF")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("OGHAM SPACE MARK validation", () => {
+    expect(whiteSpaceTokenizer("\u1680")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("EN QUAD validation", () => {
+    expect(whiteSpaceTokenizer("\u2000")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("EM QUAD validation", () => {
+    expect(whiteSpaceTokenizer("\u2001")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("EN SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2002")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("EM SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2003")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("THREE-PER-EM SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2004")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("FOUR-PER-EM SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2005")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("SIX-PER-EM SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2006")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("FIGURE SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2007")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("PUNCTUATION SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2008")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("THIN SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u2009")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("HAIR SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u200A")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("NARROW NO-BREAK SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u202F")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("MEDIUM MATEMATICAL SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u205F")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
+
+  it("IDEAOGRAPHIC SPACE validation", () => {
+    expect(whiteSpaceTokenizer("\u3000")).toStrictEqual([Token.WhiteSpace, lenOne, 1]);
+  });
 });
-
-spec12_2("CHARACTER TABULATION validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u0009"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("LINE TABULATION validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u000B"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("FORM FEED validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u000B"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u0020"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("NO-BREAK SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u000B"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("ZERO WIDTH NO-BREAK SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\uFEFF"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("OGHAM SPACE MARK validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u1680"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("EN QUAD validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2000"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("EM QUAD validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2001"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("EN SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2002"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("EM SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2003"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("THREE-PER-EM SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2004"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("FOUR-PER-EM SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2005"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("SIX-PER-EM SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2006"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("FIGURE SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2007"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("PUNCTUATION SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2008"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("THIN SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u2009"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("HAIR SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u200A"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("NARROW NO-BREAK SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u202F"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("MEDIUM MATEMATICAL SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u205F"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2("IDEAOGRAPHIC SPACE validation", () => {
-  assert.equal(whiteSpaceTokenizer("\u3000"), [Token.WhiteSpace, lenOne, 1]);
-});
-
-spec12_2.run();

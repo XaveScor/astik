@@ -1,22 +1,18 @@
-import {test} from "uvu";
-import * as assert from "uvu/assert";
 import {CharStream} from "./char-stream";
 
-test("simple char-stream", () => {
+it("simple char-stream", () => {
   const stream = new CharStream(" ");
-  assert.not.ok(stream.isClosed());
-  assert.is(stream.nextChar(), " ");
-  assert.ok(stream.isClosed());
+  expect(stream.isClosed()).toBeFalsy();
+  expect(stream.nextChar()).toBe(" ");
+  expect(stream.isClosed()).toBeTruthy();
 });
 
-test("char-stream movePointerBack", () => {
+it("char-stream movePointerBack", () => {
   const stream = new CharStream(" ");
-  assert.is(stream.nextChar(), " ");
-  assert.ok(stream.isClosed());
+  expect(stream.nextChar()).toBe(" ");
+  expect(stream.isClosed()).toBeTruthy();
   stream.movePointerBack(1);
-  assert.not.ok(stream.isClosed());
-  assert.is(stream.nextChar(), " ");
-  assert.ok(stream.isClosed());
+  expect(stream.isClosed()).toBeFalsy();
+  expect(stream.nextChar()).toBe(" ");
+  expect(stream.isClosed()).toBeTruthy();
 });
-
-test.run();
