@@ -19,7 +19,7 @@ export function comparePositions(pos1: Position, pos2: Position) {
   return pos1.column - pos2.column;
 }
 
-export function concat(pos1: Position, pos2: Position): Position {
+export function _concat(pos1: Position, pos2: Position): Position {
   if (pos2.line === 0) {
     return {
       line: pos1.line,
@@ -31,4 +31,8 @@ export function concat(pos1: Position, pos2: Position): Position {
     line: pos1.line + pos2.line,
     column: pos2.column,
   };
+}
+
+export function concat(...positions: ReadonlyArray<Position>): Position {
+  return positions.reduce(_concat);
 }
