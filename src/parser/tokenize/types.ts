@@ -8,5 +8,8 @@ export type DocumentNode = {
   token: Token;
 };
 type TokenLen = number;
+export type Flags = {
+  optional?: boolean;
+};
 export type TokenizedDocument = ReadonlyArray<DocumentNode>;
-export type Tokenizer = (chars: string) => [Token, Position, TokenLen];
+export type Tokenizer = (chars: string, flags?: Flags) => [Token, Position, TokenLen];
